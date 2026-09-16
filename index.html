@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Vokabel-Übungen</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: system-ui, sans-serif;
+    max-width: 720px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    line-height: 1.5;
+  }
+  h1 { font-size: 1.75rem; }
+  .card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    border: 1px solid #8884;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+  }
+  .card-main { flex: 1; min-width: 0; }
+  .card-tools {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-left: 1rem;
+    border-left: 1px solid #8884;
+  }
+  .evidence-toggle.active { background: #4a90d966; }
+  u.evidence-hl { text-decoration: underline; text-decoration-color: #2ecc71; text-decoration-thickness: 3px; text-underline-offset: 3px; }
+  #sidebar {
+    position: fixed;
+    top: 2rem;
+    right: 1rem;
+    width: 170px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #8884;
+    border-radius: 10px;
+    padding: 0.9rem;
+    background: Canvas;
+    color: CanvasText;
+  }
+  .side-block { display: flex; flex-direction: column; gap: 0.4rem; align-items: center; }
+  .side-label { font-size: 0.8rem; opacity: 0.7; }
+  .side-block select, .side-block > button { width: 100%; }
+  .timer-presets { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; width: 100%; }
+  .timer-preset.active { background: #4a90d966; }
+  #global-timer-display { font-variant-numeric: tabular-nums; font-size: 1.05rem; font-weight: 600; min-height: 1.3em; }
+  #tts-speed { width: 100%; }
+  #tts-speed-display { font-size: 0.85rem; opacity: 0.8; }
+  @media (max-width: 960px) { #sidebar { display: none; } }
+  .card header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  .theme { font-size: 1.1rem; font-weight: 600; }
+  .time { font-size: 0.8rem; opacity: 0.6; }
+  .controls { display: flex; gap: 0.5rem; margin-bottom: 0.6rem; }
+  button {
+    font: inherit;
+    padding: 0.35rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #8886;
+    background: transparent;
+    cursor: pointer;
+  }
+  button:hover { background: #8882; }
+  button.playing { background: #4a90d966; }
+  .transcript { white-space: pre-wrap; }
+  .transcript.hidden { display: none; }
+  .empty { opacity: 0.6; font-style: italic; }
+  .speaker-m { color: #4a90d9; font-weight: 700; }
+  .speaker-f { color: #d9508f; font-weight: 700; }
+  .quiz { margin-top: 0.8rem; }
+  .quiz.hidden { display: none; }
+  .quiz ol { padding-left: 1.3rem; }
+  .quiz li { margin-bottom: 0.7rem; }
+  .quiz .options { list-style: none; padding-left: 0.2rem; margin: 0.4rem 0 0; display: flex; flex-direction: column; gap: 0.3rem; }
+  .quiz .options label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+  .fill-input {
+    display: block;
+    margin-top: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #8886;
+    background: transparent;
+    font: inherit;
+    width: 100%;
+    max-width: 320px;
+  }
+  .answers { margin-top: 0.6rem; }
+  .answers.hidden { display: none; }
+  .answers ol { padding-left: 1.3rem; color: #2e9e4f; }
+  mark.user-hl { background: #ffd60a; color: #111; padding: 0 2px; border-radius: 3px; }
+  .highlight-popup {
+    position: fixed;
+    transform: translate(-50%, -100%);
+    background: #222;
+    color: #fff;
+    border: none;
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 10px #0006;
+  }
+  .highlight-popup:hover { background: #000; }
+</style>
+</head>
+<body>
+<h1>Vokabel-Übungen</h1>
+<div id="sidebar">
+  <div class="side-block">
+    <span class="side-label">Timer</span>
+    <div class="timer-presets">
+      <button class="timer-preset" data-min="1">1m</button>
+      <button class="timer-preset" data-min="1.5">1.5m</button>
+      <button class="timer-preset" data-min="2">2m</button>
+      <button class="timer-preset" data-min="2.5">2.5m</button>
+      <button class="timer-preset" data-min="3">3m</button>
+    </div>
+    <div id="global-timer-display"></div>
+  </div>
+  <div class="side-block">
+    <span class="side-label">Sprechgeschwindigkeit</span>
+    <input type="range" id="tts-speed" min="0.5" max="2" step="0.05" value="1">
+    <span id="tts-speed-display">1.00x</span>
+  </div>
+</div>
+<div id="list"></div>
+
+<script>
+const list = document.getElementById('list');
+let lastSnapshot = '';
+const evidenceVisible = new Set(); // exercise ids currently showing answer-evidence underlines
+
+// Dialogues always use this fixed name pair (one male, one female).
+const SPEAKER_GENDER = { 'Lukas': 'male', 'Lena': 'female' };
+const DIALOGUE_LINE_RE = /^([A-Za-zÄÖÜäöüß]+):\s*(.+)$/;
+
+let ttsRate = parseFloat(localStorage.getItem('tts-rate') || '1');
+
+// Real neural TTS via the server (Piper, two distinct German voices —
+// see /tts?voice=male|female&text=... in vocab_server.py), not the
+// browser's built-in speechSynthesis (which only had one flat-sounding
+// system voice here and couldn't tell the speakers apart).
+async function fetchTTS(text, voiceName) {
+  const res = await fetch(`/tts?voice=${voiceName}&text=${encodeURIComponent(text)}`);
+  if (!res.ok) throw new Error(`TTS failed (${res.status})`);
+  return URL.createObjectURL(await res.blob());
+}
+
+function playClip(url, playBtn) {
+  return new Promise((resolve) => {
+    const audio = new Audio(url);
+    audio.playbackRate = ttsRate;
+    playBtn._audio = audio;
+    audio.onended = resolve;
+    audio.onerror = resolve;
+    audio.play();
+  });
+}
+
+function pause(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Piper (like most sentence-level TTS) is trained on single sentences —
+// feeding it a whole paragraph in one call flattens the prosody into
+// exactly the run-on "dictation" delivery that got flagged. Splitting on
+// sentence boundaries and re-inserting a pause between clips (longer
+// across a speaker change) is what actually gives it pacing.
+function splitSentences(text) {
+  return text.match(/[^.!?]+[.!?]+(\s|$)|[^.!?]+$/g)?.map(s => s.trim()).filter(Boolean) || [];
+}
+
+function buildSegments(plainText) {
+  const lines = plainText.split('\n').filter(l => l.trim());
+  const parsedLines = lines.map(l => l.match(DIALOGUE_LINE_RE));
+  const isDialogue = parsedLines.length > 0 && parsedLines.every(Boolean);
+  const segments = [];
+  if (isDialogue) {
+    for (const m of parsedLines) {
+      const voice = SPEAKER_GENDER[m[1]] === 'female' ? 'female' : 'male';
+      for (const sentence of splitSentences(m[2])) segments.push({ text: sentence, voice });
+    }
+  } else {
+    for (const sentence of splitSentences(plainText)) segments.push({ text: sentence, voice: 'male' });
+  }
+  return segments;
+}
+
+async function speak(plainText, playBtn) {
+  playBtn._abort = false;
+  const segments = buildSegments(plainText);
+
+  playBtn.classList.add('playing');
+  try {
+    let prevVoice = null;
+    for (const seg of segments) {
+      if (playBtn._abort) break;
+      if (prevVoice !== null) await pause(prevVoice !== seg.voice ? 500 : 280);
+      if (playBtn._abort) break;
+      const url = await fetchTTS(seg.text, seg.voice);
+      if (playBtn._abort) break;
+      await playClip(url, playBtn);
+      prevVoice = seg.voice;
+    }
+  } catch (e) {
+    alert(`Sprachausgabe fehlgeschlagen: ${e.message}`);
+  }
+  playBtn.classList.remove('playing');
+  playBtn._audio = null;
+}
+
+function stopSpeaking(playBtn) {
+  playBtn._abort = true;
+  if (playBtn._audio) playBtn._audio.pause();
+  playBtn.classList.remove('playing');
+}
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// Escapes + reapplies stored highlights — only safe for visible text, never
+// for attribute values (would corrupt the markup).
+function hl(s, exId) {
+  return applyStoredHighlights(esc(s), exId);
+}
+
+function answerKey(exId, qIndex) {
+  return `vocab-answer:${exId}:${qIndex}`;
+}
+
+function renderQuestion(q, i, exId) {
+  const key = answerKey(exId, i);
+  const saved = localStorage.getItem(key) || '';
+  if (q.type === 'mcq' || q.type === 'tf') {
+    const options = q.type === 'tf' ? ['Richtig', 'Falsch'] : q.options;
+    const name = `q-${exId}-${i}`;
+    const optsHtml = options.map(o => `
+      <li><label>
+        <input type="radio" name="${name}" value="${esc(o)}" data-key="${esc(key)}" ${saved === o ? 'checked' : ''}>
+        ${hl(o, exId)}
+      </label></li>`).join('');
+    return `<li>${hl(q.question, exId)}<ol class="options">${optsHtml}</ol></li>`;
+  }
+  return `<li>${hl(q.question, exId)}
+    <input type="text" class="fill-input" data-key="${esc(key)}" value="${esc(saved)}" placeholder="deine Antwort">
+  </li>`;
+}
+
+function renderQuiz(questions, exId) {
+  if (!questions || !questions.length) return '';
+  return `
+    <div class="quiz hidden" data-ex-id="${exId}">
+      <ol>${questions.map((q, i) => renderQuestion(q, i, exId)).join('')}</ol>
+      <button class="answers-toggle">Antworten anzeigen</button>
+      <div class="answers hidden">
+        <ol>${questions.map(q => `<li>${hl(q.answer, exId)}</li>`).join('')}</ol>
+      </div>
+    </div>`;
+}
+
+function highlightKey(exId) {
+  return `vocab-highlights:${exId}`;
+}
+
+function saveHighlight(exId, text) {
+  const key = highlightKey(exId);
+  const list = JSON.parse(localStorage.getItem(key) || '[]');
+  list.push(text);
+  localStorage.setItem(key, JSON.stringify(list));
+}
+
+function clearHighlights(exId, cardEl) {
+  localStorage.removeItem(highlightKey(exId));
+  cardEl.querySelectorAll('mark.user-hl').forEach(m => m.replaceWith(document.createTextNode(m.textContent)));
+}
+
+// --- Global sidebar: one timer + one speed control for the whole page ---
+const speedInput = document.getElementById('tts-speed');
+const speedDisplay = document.getElementById('tts-speed-display');
+speedInput.value = ttsRate;
+speedDisplay.textContent = `${ttsRate.toFixed(2)}x`;
+speedInput.addEventListener('input', () => {
+  ttsRate = parseFloat(speedInput.value);
+  speedDisplay.textContent = `${ttsRate.toFixed(2)}x`;
+  localStorage.setItem('tts-rate', ttsRate);
+});
+
+const gTimerDisplay = document.getElementById('global-timer-display');
+let gTimerInterval = null;
+
+function stopGlobalTimer() {
+  clearInterval(gTimerInterval);
+  gTimerInterval = null;
+  gTimerDisplay.textContent = '';
+  document.querySelectorAll('.timer-preset.active').forEach(b => b.classList.remove('active'));
+}
+
+document.querySelectorAll('.timer-preset').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const wasActive = btn.classList.contains('active');
+    stopGlobalTimer();
+    if (wasActive) return; // clicking the running preset again just stops it
+
+    btn.classList.add('active');
+    const end = Date.now() + parseFloat(btn.dataset.min) * 60000;
+    const tick = () => {
+      const remaining = Math.max(0, Math.round((end - Date.now()) / 1000));
+      const m = String(Math.floor(remaining / 60)).padStart(2, '0');
+      const s = String(remaining % 60).padStart(2, '0');
+      gTimerDisplay.textContent = `${m}:${s}`;
+      if (remaining <= 0) {
+        clearInterval(gTimerInterval);
+        gTimerInterval = null;
+        gTimerDisplay.textContent = '⏰ Fertig!';
+        btn.classList.remove('active');
+      }
+    };
+    tick();
+    gTimerInterval = setInterval(tick, 1000);
+  });
+});
+
+// ponytail: reapplies by plain substring match on the rendered HTML; a
+// highlight that straddles a <strong>/speaker tag boundary won't survive
+// a re-render. Good enough for highlighting a few words within a sentence.
+function applyStoredHighlights(html, exId) {
+  const list = JSON.parse(localStorage.getItem(highlightKey(exId)) || '[]');
+  for (const phrase of list) {
+    const needle = esc(phrase);
+    if (needle && html.includes(needle)) {
+      html = html.replace(needle, `<mark class="user-hl">${needle}</mark>`);
+    }
+  }
+  return html;
+}
+
+// Underlines each question's `evidence` quote (a verbatim substring from
+// the exercise text) in the transcript — only while the eye toggle for
+// that exercise is on. Same plain-substring-match caveat as highlights.
+function applyEvidence(html, ex) {
+  if (!evidenceVisible.has(ex.id) || !ex.questions) return html;
+  for (const q of ex.questions) {
+    if (!q.evidence) continue;
+    const needle = esc(q.evidence);
+    if (needle && html.includes(needle)) {
+      html = html.replace(needle, `<u class="evidence-hl">${needle}</u>`);
+    }
+  }
+  return html;
+}
+
+function buildTranscriptHtml(ex) {
+  let html = ex.text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/^([A-Za-zÄÖÜäöüß]+):/gm, (m, name) => {
+      const cls = SPEAKER_GENDER[name] === 'male' ? 'speaker-m'
+                : SPEAKER_GENDER[name] === 'female' ? 'speaker-f' : '';
+      return cls ? `<span class="${cls}">${name}:</span>` : m;
+    });
+  html = applyEvidence(html, ex);
+  html = applyStoredHighlights(html, ex.id);
+  return html;
+}
+
+let hlPopup = null;
+function removeHlPopup() {
+  if (hlPopup) { hlPopup.remove(); hlPopup = null; }
+}
+
+document.addEventListener('mousedown', (e) => {
+  if (hlPopup && e.target !== hlPopup) removeHlPopup();
+});
+
+document.addEventListener('mouseup', (e) => {
+  if (hlPopup && (e.target === hlPopup || hlPopup.contains(e.target))) return;
+  const sel = window.getSelection();
+  const text = sel && sel.toString().trim();
+  if (!text || sel.rangeCount === 0) return;
+  const range = sel.getRangeAt(0);
+  const node = range.commonAncestorContainer;
+  const hlContainer = (node.nodeType === 1 ? node : node.parentElement)?.closest('[data-ex-id]');
+  if (!hlContainer) return;
+
+  removeHlPopup();
+  const rect = range.getBoundingClientRect();
+  const btn = document.createElement('button');
+  btn.textContent = '🖍 Markieren';
+  btn.className = 'highlight-popup';
+  btn.style.left = `${rect.left + rect.width / 2}px`;
+  btn.style.top = `${rect.top - 10}px`;
+  // Do the highlight on mousedown, not click: the global mouseup listener
+  // above fires first (before click) and would otherwise tear this button
+  // down and rebuild a fresh one out from under the pending click.
+  btn.addEventListener('mousedown', ev => {
+    ev.preventDefault();
+    const mark = document.createElement('mark');
+    mark.className = 'user-hl';
+    mark.appendChild(range.extractContents());
+    range.insertNode(mark);
+    saveHighlight(hlContainer.dataset.exId, text);
+    sel.removeAllRanges();
+    removeHlPopup();
+  });
+  document.body.appendChild(btn);
+  hlPopup = btn;
+});
+
+function render(exercises) {
+  const snapshot = JSON.stringify(exercises);
+  if (snapshot === lastSnapshot) return;
+  lastSnapshot = snapshot;
+  list.innerHTML = '';
+  if (!exercises.length) {
+    list.innerHTML = '<p class="empty">Noch keine Übungen. Gib Claude ein Thema.</p>';
+    return;
+  }
+  for (const ex of exercises) {
+    const plain = ex.text.replace(/\*\*/g, '');
+    const html = buildTranscriptHtml(ex);
+    const hasEvidence = ex.questions && ex.questions.some(q => q.evidence);
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-main">
+        <header>
+          <span class="theme">${ex.theme}</span>
+          <span class="time">${new Date(ex.created * 1000).toLocaleString()}</span>
+        </header>
+        <div class="controls">
+          <button class="play">▶ Anhören</button>
+          <button class="toggle">Text anzeigen</button>
+          ${ex.questions && ex.questions.length ? '<button class="quiz-toggle">Fragen anzeigen</button>' : ''}
+        </div>
+        <div class="transcript hidden" data-ex-id="${ex.id}">${html}</div>
+        ${renderQuiz(ex.questions, ex.id)}
+      </div>
+      <div class="card-tools">
+        <button class="clear-hl" title="Markierungen entfernen">🧹</button>
+        ${hasEvidence ? `<button class="evidence-toggle${evidenceVisible.has(ex.id) ? ' active' : ''}" title="Antwort-Textstellen zeigen">👁</button>` : ''}
+      </div>
+    `;
+
+    const playBtn = card.querySelector('.play');
+    const toggleBtn = card.querySelector('.toggle');
+    const transcript = card.querySelector('.transcript');
+
+    playBtn.addEventListener('click', () => {
+      if (playBtn.classList.contains('playing')) {
+        stopSpeaking(playBtn);
+        return;
+      }
+      speak(plain, playBtn);
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      const hidden = transcript.classList.toggle('hidden');
+      toggleBtn.textContent = hidden ? 'Text anzeigen' : 'Text verbergen';
+    });
+
+    const quizToggle = card.querySelector('.quiz-toggle');
+    if (quizToggle) {
+      const quiz = card.querySelector('.quiz');
+      const answersToggle = card.querySelector('.answers-toggle');
+      const answers = card.querySelector('.answers');
+      quizToggle.addEventListener('click', () => {
+        const hidden = quiz.classList.toggle('hidden');
+        quizToggle.textContent = hidden ? 'Fragen anzeigen' : 'Fragen verbergen';
+      });
+      answersToggle.addEventListener('click', () => {
+        const hidden = answers.classList.toggle('hidden');
+        answersToggle.textContent = hidden ? 'Antworten anzeigen' : 'Antworten verbergen';
+      });
+      quiz.querySelectorAll('input[type=radio]').forEach(r => {
+        r.addEventListener('change', () => localStorage.setItem(r.dataset.key, r.value));
+      });
+      quiz.querySelectorAll('input.fill-input').forEach(inp => {
+        inp.addEventListener('input', () => localStorage.setItem(inp.dataset.key, inp.value));
+      });
+    }
+
+    card.querySelector('.clear-hl').addEventListener('click', () => clearHighlights(ex.id, card));
+
+    const evidenceBtn = card.querySelector('.evidence-toggle');
+    if (evidenceBtn) {
+      evidenceBtn.addEventListener('click', () => {
+        if (evidenceVisible.has(ex.id)) evidenceVisible.delete(ex.id);
+        else evidenceVisible.add(ex.id);
+        evidenceBtn.classList.toggle('active');
+        // Update only this card's transcript in place — a full render()
+        // would also collapse every other card's open transcript/quiz.
+        transcript.innerHTML = buildTranscriptHtml(ex);
+      });
+    }
+
+    list.appendChild(card);
+  }
+}
+
+async function refresh() {
+  try {
+    const res = await fetch('/exercises');
+    const data = await res.json();
+    render(data.exercises);
+  } catch (e) { /* server not reachable yet */ }
+}
+
+refresh();
+setInterval(refresh, 4000);
+</script>
+</body>
+</html>

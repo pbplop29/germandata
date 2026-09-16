@@ -1,0 +1,5 @@
+.venv/
+tts_cache/
+voices/
+__pycache__/
+*.pyc

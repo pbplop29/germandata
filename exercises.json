@@ -1,0 +1,421 @@
+[
+  {
+    "id": 1,
+    "theme": "Charaktereigenschaften",
+    "text": "Lena: Wie findest du eigentlich unseren neuen Kollegen, Tobias?\nLukas: Ehrlich gesagt, er hat eine interessante Mischung von **Eigenschaften**. Er ist unglaublich **verantwortungsbewusst** – er vergisst nie einen Termin.\nLena: Stimmt, aber manchmal wirkt er auch ziemlich **geizig**, oder? Beim letzten Teamessen wollte er einfach nicht zahlen.\nLukas: Ja, das stimmt leider. Dafür ist er sehr **belastbar** – selbst unter Stress bleibt er ruhig.\nLena: Und seine **Konfliktfähigkeit** ist wirklich beeindruckend. Er kann Streit zwischen Kollegen schlichten, ohne dass jemand beleidigt ist.\nLukas: Genau, er ist auch **feinfühlig** – er merkt sofort, wenn jemandem etwas Sorgen macht.\nLena: Trotzdem finde ich seine **Bescheidenheit** am schönsten an ihm. Er redet nie über seine eigenen Erfolge.\nLukas: Stimmt, er ist eher **zurückhaltender** als die anderen im Team. Aber wenn er spricht, **wirkt** er sehr überzeugend **auf** alle.\nLena: Ja, er **strahlt** einfach Ruhe und Kompetenz **aus**.",
+    "words": [
+      "die Eigenschaft",
+      "verantwortungsbewusst",
+      "geizig",
+      "belastbar",
+      "die Konfliktfähigkeit",
+      "feinfühlig",
+      "die Bescheidenheit",
+      "zurückhaltender",
+      "wirken auf",
+      "ausstrahlen"
+    ],
+    "created": 1789563267.8050268,
+    "questions": [
+      {
+        "type": "tf",
+        "question": "Tobias vergisst laut Lukas häufig wichtige Termine.",
+        "answer": "Falsch"
+      },
+      {
+        "type": "mcq",
+        "question": "Worüber beschwert sich Lena bezüglich des letzten Teamessens?",
+        "options": [
+          "Tobias kam zu spät.",
+          "Tobias wollte nicht für sein Essen bezahlen.",
+          "Tobias hat zu viel bestellt.",
+          "Tobias hat das falsche Restaurant vorgeschlagen."
+        ],
+        "answer": "Tobias wollte nicht für sein Essen bezahlen."
+      },
+      {
+        "type": "fill",
+        "question": "Laut Lukas bleibt Tobias auch in schwierigen, stressigen Momenten ______.",
+        "answer": "ruhig (gelassen)"
+      },
+      {
+        "type": "mcq",
+        "question": "Was macht Tobias laut Lena, wenn es Streit zwischen Kollegen gibt?",
+        "options": [
+          "Er hält sich komplett raus.",
+          "Er nimmt immer die Seite des Chefs.",
+          "Er vermittelt so, dass sich niemand beleidigt fühlt.",
+          "Er meldet den Streit sofort der Personalabteilung."
+        ],
+        "answer": "Er vermittelt so, dass sich niemand beleidigt fühlt."
+      },
+      {
+        "type": "tf",
+        "question": "Tobias spricht im Gespräch der beiden oft stolz über seine eigenen Erfolge.",
+        "answer": "Falsch"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "theme": "an seine Grenzen gehen",
+    "text": "Lena: Wie war dein Marathon letztes Wochenende? Du wolltest doch unbedingt **an deine Grenzen gehen**.\nLukas: Ehrlich gesagt, ich musste mich mehr **anstrengen**, als ich dachte. Bei Kilometer dreißig wollte ich aufgeben.\nLena: Aber du bist doch zu viel mehr **fähig**, als du selbst glaubst!\nLukas: Genau in dem Moment musste ich eine wichtige **Entscheidung treffen**: aufhören oder weiterlaufen.\nLena: Und worauf hast du dich in der Situation **verlassen**?\nLukas: Auf meinen Trainer – seine Stimme im Kopf hat mich total **beeinflusst**, positiv natürlich.\nLena: Schön, dass du dich so gut an den Schmerz **anpassen** konntest.\nLukas: Ja, und am Ende habe ich das Ziel wirklich **genossen**. Ein **unvergesslicher** Moment.\nLena: Solche Erfahrungen **fördern** doch das Selbstvertrauen enorm, oder?\nLukas: Absolut. Jetzt weiß ich, wozu ich wirklich fähig bin.",
+    "words": [
+      "an seine Grenzen gehen",
+      "sich anstrengen",
+      "fähig (zu)",
+      "eine Entscheidung treffen",
+      "sich auf jemanden verlassen",
+      "beeinflussen",
+      "(sich) anpassen an",
+      "genießen",
+      "unvergesslich",
+      "fördern"
+    ],
+    "questions": [
+      {
+        "type": "tf",
+        "question": "Lukas wollte bei Kilometer dreißig aufgeben.",
+        "answer": "Richtig"
+      },
+      {
+        "type": "mcq",
+        "question": "Worauf hat sich Lukas verlassen, um weiterzulaufen?",
+        "options": [
+          "Auf Musik in seinen Kopfhörern",
+          "Auf die Stimme seines Trainers im Kopf",
+          "Auf die Unterstützung der Zuschauer",
+          "Auf einen Energieriegel"
+        ],
+        "answer": "Auf die Stimme seines Trainers im Kopf"
+      },
+      {
+        "type": "fill",
+        "question": "Am Ende des Rennens hat Lukas das Ziel sehr ______ – für ihn war es ein unvergesslicher Moment.",
+        "answer": "genossen"
+      },
+      {
+        "type": "mcq",
+        "question": "Was, laut Lena, bewirken solche extremen Erfahrungen?",
+        "options": [
+          "Sie schwächen das Selbstvertrauen.",
+          "Sie fördern das Selbstvertrauen.",
+          "Sie machen müde und gleichgültig.",
+          "Sie haben keinen besonderen Effekt."
+        ],
+        "answer": "Sie fördern das Selbstvertrauen."
+      },
+      {
+        "type": "tf",
+        "question": "Lukas ist sich am Ende sicherer, wozu er fähig ist.",
+        "answer": "Richtig"
+      }
+    ],
+    "created": 1789565156.594615
+  },
+  {
+    "id": 3,
+    "theme": "Charaktereigenschaften (Radiosendung)",
+    "text": "Lukas: Herzlich willkommen zurück bei „Psychologie am Nachmittag\" auf Radio Eins, es ist jetzt Viertel nach drei.\nLena: Vielen Dank für die Einladung, Lukas, ich freue mich sehr, heute hier zu sein.\nLukas: Bevor wir loslegen, kurz zum Wetter: Es bleibt heiter bis wolkig, am Abend könnte es leicht regnen.\nLena: Gutes Timing dann für die Regenschirme, die viele heute Morgen eingepackt haben.\nLukas: Genau! So, widmen wir uns unserem Thema: Charaktereigenschaften. Du hast gerade einen interessanten Fall aus deiner Praxis erwähnt.\nLena: Ja, ein junger Mann kam zu mir, der einfach nicht aufgeben wollte, egal wie schwer sein Projekt war. So ein **Durchhaltevermögen** sieht man selten.\nLukas: Bevor du weitererzählst – kurzer Hinweis für unsere Hörer: In zehn Minuten gibt es die Verkehrsmeldungen.\nLena: Alles klar. Also, dieser Mann hatte auch enorm viel **Geduld** mit seinen Kollegen, selbst wenn Projekte sich verzögerten.\nLukas: Das klingt nach einer seltenen Kombination. Was ist dir sonst noch bei ihm aufgefallen?\nLena: Er war unglaublich **phantasievoll** bei Problemlösungen, hatte immer ungewöhnliche Ideen. Und wenn er erklärte, hat er ständig mit den Händen **gestikuliert** – sehr lebendig.\nLukas: Klingt nach einem echten Kreativkopf. Wir spielen gleich einen Song, aber vorher noch eine Frage: Gab es auch negative Seiten?\nLena: Ehrlich gesagt schon. Manchmal war er ziemlich **vergesslich**, hat wichtige Termine einfach verpasst.\nLukas: Das kennen sicher viele unserer Hörer.\nLena: Und wenn ihm eine Idee nicht gefiel, hat er sofort **die Stirn gerunzelt** – man konnte sofort sehen, was er dachte.\nLukas: Haha, sehr ehrlich, dieses Gesicht.\nLena: Einmal erzählte er mir auch von einem Kollegen, der ihm gegenüber richtig **schmierig** auftrat, nur um befördert zu werden.\nLukas: Uff, das klingt unangenehm. Aber zurück zu positiven Eigenschaften: War seine **Kreativität** auch beruflich hilfreich?\nLena: Absolut, seine **Kommunikationsstärke** in Kombination mit seiner Kreativität hat ihm geholfen, das ganze Team zu überzeugen.\nLukas: Man konnte förmlich spüren, wie viel Energie er **ausstrahlt**, wenn du von ihm erzählst.\nLena: Genau das war auch mein Eindruck bei unserem ersten Treffen.\nLukas: Vielen Dank, Lena, für diese spannenden Einblicke! Nach der Musik geht es weiter mit euren Anrufen.\nLena: Sehr gerne, bis gleich!",
+    "words": [
+      "das Durchhaltevermögen",
+      "die Geduld",
+      "phantasievoll",
+      "gestikulieren",
+      "vergesslich",
+      "die Stirn runzeln",
+      "schmierig",
+      "die Kreativität",
+      "die Kommunikationsstärke",
+      "ausstrahlen"
+    ],
+    "questions": [
+      {
+        "type": "tf",
+        "question": "Lena spricht in der Sendung über einen Kollegen aus dem Radiostudio.",
+        "answer": "Falsch"
+      },
+      {
+        "type": "mcq",
+        "question": "Worüber sprechen Lukas und Lena, bevor sie mit dem eigentlichen Thema beginnen?",
+        "options": [
+          "Über die neuesten Charts",
+          "Über das Wetter",
+          "Über die Verkehrslage",
+          "Über einen Anruf eines Hörers"
+        ],
+        "answer": "Über das Wetter"
+      },
+      {
+        "type": "fill",
+        "question": "Der junge Mann aus Lenas Praxis hat trotz großer Schwierigkeiten nie aufgegeben – ein Beispiel für außergewöhnliches ______.",
+        "answer": "Durchhaltevermögen"
+      },
+      {
+        "type": "mcq",
+        "question": "Was war laut Lena eine negative Eigenschaft des jungen Mannes?",
+        "options": [
+          "Er war extrem ungeduldig mit Kollegen.",
+          "Er hat oft wichtige Termine vergessen.",
+          "Er hat nie mit den Händen gestikuliert.",
+          "Er war völlig kreativlos."
+        ],
+        "answer": "Er hat oft wichtige Termine vergessen."
+      },
+      {
+        "type": "tf",
+        "question": "Laut Lukas soll es nach der Musik weiter mit Höreranrufen gehen.",
+        "answer": "Richtig"
+      }
+    ],
+    "created": 1789566297.5730796
+  },
+  {
+    "id": 4,
+    "theme": "an seine Grenze gehen (Geschichte)",
+    "text": "Ich stehe gern früh auf und gehe wandern. Letzten Monat wollte ich endlich **an meine Grenze gehen** und plante eine schwere Tour in den Bergen. Mein Freund Bastian wollte mitkommen, aber er wurde krank und blieb zu Hause. Also ging ich allein los.\n\nAm Anfang war alles einfach. Der Weg war gut markiert, und das Wetter war schön. Nach zwei Stunden wurde der Weg aber steiler und schwieriger. Plötzlich fing es an zu regnen, und der Stein unter meinen Füßen wurde nass und rutschig.\n\nIch musste schnell eine wichtige **Entscheidung treffen**: umkehren oder weitergehen? Ich entschied mich, weiterzugehen und mich ganz dem nächsten Schritt zu **widmen**. Dabei ging ich **möglichst** vorsichtig. Meine **Leistungsfähigkeit** wurde in diesem Moment wirklich getestet: Meine Beine taten weh, aber ich gab mir große **Mühe**, ruhig zu bleiben. Ich dachte sogar kurz an mein Käsebrot, das ich für den Gipfel eingepackt hatte – ein kleiner, komischer Gedanke mitten in der schwierigen Situation.\n\nAls ich fast oben war, sah ich dunkle Wolken am Himmel. Deshalb musste ich mich **beeilen**. Endlich am Gipfel angekommen, sah ich das ganze Tal vor mir. In diesem Moment **erschloss** sich mir die Schönheit der Natur ganz neu. Solche Erlebnisse **fördern**, glaube ich, nicht nur den Körper, sondern auch den Kopf.\n\nAm Abend rief ich Bastian an. Ich **entschuldigte mich bei ihm**, weil ich ohne ihn losgegangen war. Er lachte nur und sagte, beim nächsten Mal sei er dabei. Für mich war dieser Tag jedenfalls **unvergesslich**.",
+    "words": [
+      "an seine Grenze gehen",
+      "eine Entscheidung treffen",
+      "sich widmen",
+      "möglichst",
+      "die Leistungsfähigkeit",
+      "sich Mühe geben",
+      "sich beeilen",
+      "erschließen",
+      "fördern",
+      "sich entschuldigen bei",
+      "unvergesslich"
+    ],
+    "questions": [
+      {
+        "type": "tf",
+        "question": "Bastian ist mit dem Erzähler zur Tour mitgegangen.",
+        "answer": "Falsch",
+        "evidence": "Mein Freund Bastian wollte mitkommen, aber er wurde krank und blieb zu Hause."
+      },
+      {
+        "type": "mcq",
+        "question": "Was machte den Weg plötzlich gefährlich?",
+        "options": [
+          "Ein plötzlicher Sturm mit Blitzen",
+          "Regen, der den Stein rutschig machte",
+          "Ein verletztes Bein",
+          "Ein gesperrter Weg"
+        ],
+        "answer": "Regen, der den Stein rutschig machte",
+        "evidence": "der Stein unter meinen Füßen wurde nass und rutschig"
+      },
+      {
+        "type": "mcq",
+        "question": "Was sah der Erzähler, als er endlich oben ankam?",
+        "options": [
+          "Nichts, weil dichter Nebel die Sicht versperrte",
+          "Das ganze Tal vor sich",
+          "Bastian, der dort auf ihn wartete",
+          "Nur die nächste Bergspitze"
+        ],
+        "answer": "Das ganze Tal vor sich",
+        "evidence": "sah ich das ganze Tal vor mir"
+      },
+      {
+        "type": "fill",
+        "question": "Am Abend rief der Erzähler Bastian an und entschuldigte sich, ______ er ohne ihn losgegangen war.",
+        "answer": "weil",
+        "evidence": "weil ich ohne ihn losgegangen war"
+      },
+      {
+        "type": "tf",
+        "question": "Der Erzähler musste sich am Ende beeilen, weil dunkle Wolken aufzogen.",
+        "answer": "Richtig",
+        "evidence": "sah ich dunkle Wolken am Himmel"
+      }
+    ],
+    "created": 1789567578.540551
+  },
+  {
+    "id": 5,
+    "theme": "Charaktereigenschaften (Geschichte)",
+    "text": "Vor zwei Monaten bekam unser Team eine neue Kollegin: Sofia aus Spanien. Am ersten Tag war ich ein bisschen nervös, weil ich nicht wusste, wie sie so ist.\n\nSchon in der ersten Woche fiel mir ihre **Offenheit** auf. Sie hat sofort mit allen im Büro gesprochen, auch mit Leuten aus anderen Abteilungen. Unser Kaffeeautomat war damals kaputt, und wir mussten zwei Wochen ohne Kaffee auskommen – das war für alle ein kleines Drama.\n\nSofia ist außerdem sehr **großzügig**. Als ich einmal mein Portemonnaie vergessen hatte, hat sie sofort mein Mittagessen bezahlt, ohne lange zu überlegen. Ihre **Ehrlichkeit** war mir auch schnell klar: Wenn ihr eine Idee nicht gefiel, hat sie das direkt gesagt, aber immer freundlich.\n\nIn unserem wöchentlichen Meeting am Montag sitzt sie meistens neben mir. Dort zeigt sich ihr großer **Fleiß**: Sie arbeitet oft länger als alle anderen und bringt immer neue Ideen mit. Ihre **Kreativität** hat uns schon oft geholfen, wenn ein Projekt nicht weiterkam.\n\nManchmal ist Sofia aber auch sehr direkt, fast zu selbstsicher. Ihr **Selbstbewusstsein** ist so groß, dass sie in Diskussionen selten nachgibt. Man merkt auch ihr südländisches **Temperament**, zum Beispiel wenn sie sich über schlechtes Wetter beschwert oder sich über eine gute Nachricht freut. Das mag nicht jeder im Team.\n\nWas mich überrascht hat, ist ihre **Disziplin**. Jeden Morgen um Punkt acht ist sie da, nie später. Diese **Pünktlichkeit** kannte ich von früheren Kollegen so nicht.\n\nGleichzeitig ist Sofia ziemlich **bescheiden**: Wenn ein Projekt gut läuft, sagt sie immer, das sei Teamarbeit gewesen, nicht ihr Verdienst allein.\n\nLetzte Woche gab es Pizza für das ganze Team, weil wir ein großes Projekt fertig hatten. Sofia hat dabei viel gelacht und erzählt, wie **verschlossen** sie als Kind eigentlich war – ganz anders als heute. Für mich zeigt das: Menschen können sich wirklich verändern.",
+    "words": [
+      "die Offenheit",
+      "großzügig",
+      "die Ehrlichkeit",
+      "der Fleiß",
+      "die Kreativität",
+      "das Selbstbewusstsein",
+      "das Temperament",
+      "die Disziplin",
+      "die Pünktlichkeit",
+      "bescheiden",
+      "verschlossen"
+    ],
+    "questions": [
+      {
+        "type": "tf",
+        "question": "Sofia hat dem Erzähler das Mittagessen bezahlt, weil er sein Portemonnaie vergessen hatte.",
+        "answer": "Richtig",
+        "evidence": "hat sie sofort mein Mittagessen bezahlt, ohne lange zu überlegen"
+      },
+      {
+        "type": "mcq",
+        "question": "Was war im Büro in den ersten Wochen kaputt?",
+        "options": [
+          "Der Drucker",
+          "Der Kaffeeautomat",
+          "Die Klimaanlage",
+          "Der Aufzug"
+        ],
+        "answer": "Der Kaffeeautomat",
+        "evidence": "Unser Kaffeeautomat war damals kaputt"
+      },
+      {
+        "type": "mcq",
+        "question": "Wie reagiert Sofia normalerweise, wenn ein Projekt erfolgreich ist?",
+        "options": [
+          "Sie sagt, das sei vor allem ihr eigener Verdienst.",
+          "Sie sagt, das sei Teamarbeit gewesen.",
+          "Sie feiert nur mit den Chefs.",
+          "Sie spricht nie darüber."
+        ],
+        "answer": "Sie sagt, das sei Teamarbeit gewesen.",
+        "evidence": "sagt sie immer, das sei Teamarbeit gewesen, nicht ihr Verdienst allein"
+      },
+      {
+        "type": "fill",
+        "question": "Jeden Morgen um Punkt acht ist Sofia da, nie ______.",
+        "answer": "später",
+        "evidence": "Jeden Morgen um Punkt acht ist sie da, nie später"
+      },
+      {
+        "type": "tf",
+        "question": "Sofia hat erzählt, dass sie als Kind sehr offen und gesprächig war.",
+        "answer": "Falsch",
+        "evidence": "sie als Kind eigentlich war"
+      }
+    ],
+    "created": 1789569763.24611
+  },
+  {
+    "id": 6,
+    "theme": "miteinander leben",
+    "text": "Lena: Wie war dein Wochenende? Du warst doch bei diesem Nachbarschaftsfest, oder?\nLukas: Ja, genau! Total interessant. In unserer Straße wohnen Leute aus zwölf verschiedenen Ländern.\nLena: Zwölf? Wow, das ist wirklich vielfältig.\nLukas: Ja, aber weißt du, am Anfang hatten wir oft Probleme beim **Zusammenleben**. Manche Gruppen haben kaum miteinander geredet.\nLena: Das klingt fast wie eine kleine **Parallelgesellschaft**.\nLukas: Genau, das war auch mein Eindruck. Übrigens, hast du das neue Café an der Ecke schon gesehen? Es soll richtig guten Kaffee haben.\nLena: Nein, noch nicht, aber das probiere ich diese Woche mal. Also, was hat sich bei euch geändert?\nLukas: Ein paar Nachbarn haben eine Art **Kommune** gegründet – keine richtige Wohngemeinschaft, aber sie organisieren jetzt gemeinsame Aktivitäten.\nLena: Und hat das geholfen?\nLukas: Total. Sie versuchen jetzt wirklich, auf die **Bedürfnisse** aller einzugehen, auch von älteren oder kranken Nachbarn.\nLena: Das ist schön. Gibt es trotzdem noch Streit?\nLukas: Klar, manchmal. Letzte Woche gab es einen richtigen **Streit um Kleinigkeiten** – wegen der Mülltonnen, kein Witz.\nLena: Haha, klassisch.\nLukas: Am Ende konnten sie sich aber **einigen**. Wichtig ist wohl, dass man wirklich auf die Meinung der anderen **achtet**, auch wenn sie anders ist.\nLena: Und niemand darf die Wünsche der anderen einfach **außer Acht lassen**, oder?\nLukas: Genau, das war ein großes Thema beim Fest. Übrigens habe ich dort auch total leckeren Kuchen gegessen, von einer Nachbarin aus Portugal.\nLena: Klingt, als hättest du dich gut amüsiert.\nLukas: Auf jeden Fall. Am Ende hat der Organisator noch gesagt, dass man ihre **Diversitätskompetenz** als richtige Stärke der Straße **anerkennen** sollte.\nLena: Das finde ich schön formuliert. Vielleicht sollten wir sowas auch in unserer Straße probieren.\nLukas: Auf jeden Fall, lass uns das nächste Woche besprechen.",
+    "words": [
+      "zusammenleben",
+      "die Parallelgesellschaft",
+      "die Kommune",
+      "die Bedürfnisse",
+      "der Streit um Kleinigkeiten",
+      "sich einigen",
+      "achten auf",
+      "außer Acht lassen",
+      "die Diversitätskompetenz",
+      "anerkennen"
+    ],
+    "questions": [
+      {
+        "type": "tf",
+        "question": "In Lukas' Straße wohnen Menschen aus zwölf verschiedenen Ländern.",
+        "answer": "Richtig",
+        "evidence": "In unserer Straße wohnen Leute aus zwölf verschiedenen Ländern."
+      },
+      {
+        "type": "mcq",
+        "question": "Worüber gab es letzte Woche in der Nachbarschaft Streit?",
+        "options": [
+          "Wegen lauter Musik in der Nacht",
+          "Wegen der Mülltonnen",
+          "Wegen eines falsch geparkten Autos",
+          "Wegen des gemeinsamen Gartens"
+        ],
+        "answer": "Wegen der Mülltonnen",
+        "evidence": "wegen der Mülltonnen, kein Witz"
+      },
+      {
+        "type": "mcq",
+        "question": "Was haben ein paar Nachbarn gegründet, um mehr gemeinsame Aktivitäten zu organisieren?",
+        "options": [
+          "Einen offiziellen Verein mit Mitgliedsbeitrag",
+          "Eine Art Kommune",
+          "Eine eigene kleine Firma",
+          "Einen Sportclub"
+        ],
+        "answer": "Eine Art Kommune",
+        "evidence": "gegründet – keine richtige Wohngemeinschaft, aber sie organisieren jetzt gemeinsame Aktivitäten"
+      },
+      {
+        "type": "fill",
+        "question": "Am Ende konnten sich die Nachbarn ______, obwohl es zuerst Streit gab.",
+        "answer": "einigen",
+        "evidence": "Am Ende konnten sie sich aber"
+      },
+      {
+        "type": "tf",
+        "question": "Laut dem Organisator soll man die Diversitätskompetenz der Straße als Stärke anerkennen.",
+        "answer": "Richtig",
+        "evidence": "Am Ende hat der Organisator noch gesagt"
+      }
+    ],
+    "created": 1789571657.9414368
+  },
+  {
+    "id": 7,
+    "theme": "miteinander leben (Radioreportage)",
+    "text": "Lukas: Guten Tag und herzlich willkommen zu unserer Radioreportage direkt vom Straßenfest im Sonnenviertel!\nLukas: Ich stehe hier mitten auf dem Platz, überall duftet es nach Essen aus aller Welt, und im Hintergrund hört man Musik aus mindestens drei verschiedenen Kulturen. Die Menschen hier sind unglaublich **vielfältig** – ich höre gerade mindestens vier verschiedene Sprachen um mich herum.\nLukas: Neben mir steht Lena, sie wohnt seit fünf Jahren hier und hat das Fest mitorganisiert. Lena, schön, dass du Zeit hast.\nLena: Sehr gerne, hallo an alle Hörerinnen und Hörer!\nLukas: Bevor wir anfangen, kurz zur Technik: Falls es gleich etwas laut wird, das Fest läuft nämlich direkt neben uns weiter.\nLena: Ja, das stimmt, die Band da drüben ist wirklich fantastisch.\nLukas: Erzähl doch mal: Wie war das hier früher im Viertel?\nLena: Ehrlich gesagt, vor ein paar Jahren war es hier ganz anders. Viele Gruppen kannten sich kaum, jeder **blieb unter sich**.\nLukas: Woran lag das, glaubst du?\nLena: Ich glaube, es gab viele **Stereotypen** übereinander, und niemand hat wirklich nachgefragt, was die anderen eigentlich brauchen.\nLukas: Und was hat sich seitdem verändert?\nLena: Ein paar von uns haben sich entschieden, sich für ein besseres Miteinander zu **engagieren**. Wir haben zum Beispiel angefangen, regelmäßig auf die **Wünsche** aller einzugehen, bei Festen wie diesem hier.\nLukas: Übrigens, ich rieche gerade frisches Fladenbrot, das muss ich später unbedingt probieren.\nLena: Auf jeden Fall, das ist vom Stand nebenan, wirklich zu empfehlen.\nLukas: Zurück zum Thema: Was war für euch am wichtigsten, damit das Zusammenleben besser funktioniert?\nLena: Die **Gastfreundschaft**! Wenn man jemanden einfach mal zu sich einlädt, verschwinden viele Vorurteile ganz automatisch.\nLukas: Und musstet ihr manchmal auch von eigenen Wünschen **absehen**, damit alle zufrieden sind?\nLena: Klar, das gehört dazu. Man kann nicht immer alles genau so machen, wie man selbst es will. Und wir **setzen uns** auch weiterhin **dafür ein**, dass das so bleibt.\nLukas: Das klingt nach einer schönen Entwicklung. Vielen Dank, Lena, für das Gespräch!\nLena: Danke euch, und kommt gerne vorbei, das Fest geht noch bis achtzehn Uhr!\nLukas: Das war unsere Reportage vom Straßenfest im Sonnenviertel. Zurück ins Studio!",
+    "words": [
+      "vielfältig",
+      "man bleibt unter sich",
+      "das Stereotyp",
+      "sich engagieren für",
+      "die Wünsche",
+      "die Gastfreundschaft",
+      "absehen von",
+      "sich einsetzen für"
+    ],
+    "questions": [
+      {
+        "type": "tf",
+        "question": "Lukas berichtet live von einem Straßenfest im Sonnenviertel.",
+        "answer": "Richtig",
+        "evidence": "herzlich willkommen zu unserer Radioreportage direkt vom Straßenfest im Sonnenviertel"
+      },
+      {
+        "type": "mcq",
+        "question": "Wie beschreibt Lena die Situation im Viertel vor ein paar Jahren?",
+        "options": [
+          "Alle Gruppen haben viel zusammen unternommen.",
+          "Die Gruppen kannten sich kaum und blieben für sich.",
+          "Es gab damals noch gar keine Feste.",
+          "Es gab ständig laute Konflikte auf der Straße."
+        ],
+        "answer": "Die Gruppen kannten sich kaum und blieben für sich.",
+        "evidence": "Viele Gruppen kannten sich kaum"
+      },
+      {
+        "type": "mcq",
+        "question": "Was will Lukas unbedingt noch probieren?",
+        "options": [
+          "Frisches Fladenbrot",
+          "Ein bestimmtes Getränk",
+          "Süßigkeiten vom Kuchenstand",
+          "Er erwähnt kein Essen"
+        ],
+        "answer": "Frisches Fladenbrot",
+        "evidence": "ich rieche gerade frisches Fladenbrot, das muss ich später unbedingt probieren"
+      },
+      {
+        "type": "fill",
+        "question": "Laut Lena verschwinden viele Vorurteile automatisch, wenn man jemanden einfach zu sich ______.",
+        "answer": "einlädt",
+        "evidence": "Wenn man jemanden einfach mal zu sich einlädt, verschwinden viele Vorurteile ganz automatisch"
+      },
+      {
+        "type": "tf",
+        "question": "Das Straßenfest ist laut Lena bereits um vierzehn Uhr zu Ende.",
+        "answer": "Falsch",
+        "evidence": "kommt gerne vorbei, das Fest geht noch bis achtzehn Uhr"
+      }
+    ],
+    "created": 1789572976.1763465
+  }
+]

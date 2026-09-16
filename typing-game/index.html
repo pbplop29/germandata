@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>German Typer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #1a1a1f;
+    --sub: #444756;
+    --sub-alt: #2c2e33;
+    --text: #e2e2e2;
+    --error: #e05e5e;
+    --caret: #e2b714;
+    --correct: #6f7280;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-monospace, "Cascadia Code", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6vh 5vw;
+    gap: 2.5rem;
+  }
+  .topbar {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  .modes { display: flex; gap: 0.5rem; }
+  .modes button {
+    background: none;
+    border: none;
+    color: var(--sub);
+    font-family: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+  }
+  .modes button.active { color: var(--caret); background: var(--sub-alt); }
+  .stats {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1rem;
+    color: var(--caret);
+    min-height: 1.5rem;
+  }
+  .stats span b { color: var(--text); font-weight: 600; }
+
+  .stage {
+    position: relative;
+    width: min(900px, 90vw);
+  }
+  .text {
+    font-size: 2.1rem;
+    line-height: 3.2rem;
+    letter-spacing: 0.5px;
+    filter: blur(0);
+    transition: filter 0.2s;
+  }
+  .stage.blurred .text { filter: blur(4px); }
+  .char { color: var(--sub); position: relative; }
+  .char.correct { color: var(--text); }
+  .char.incorrect { color: var(--error); text-decoration: underline; }
+  .char.current::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: 2px; bottom: 2px;
+    width: 2px;
+    background: var(--caret);
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hint {
+    color: var(--sub);
+    font-size: 0.85rem;
+  }
+  .hint kbd {
+    background: var(--sub-alt);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    color: var(--text);
+  }
+
+  #input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    text-align: center;
+    animation: fadein 0.4s ease;
+  }
+  .overlay.show { display: flex; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .overlay .translation { font-size: 1.5rem; color: var(--caret); }
+  .overlay .sub { color: var(--sub); font-size: 0.95rem; }
+  .overlay .go { color: var(--sub); font-size: 0.85rem; margin-top: 0.5rem; }
+  .overlay .glossary { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; justify-content: center; max-width: 700px; font-size: 0.95rem; }
+  .overlay .glossary span b { color: var(--text); }
+  .overlay .glossary span { color: var(--sub); }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="modes">
+      <button id="mode-sentence" class="active">sentences</button>
+      <button id="mode-paragraph">paragraphs</button>
+    </div>
+    <div class="stats">
+      <span>wpm <b id="wpm">0</b></span>
+      <span>acc <b id="acc">100%</b></span>
+      <span>time <b id="time">0s</b></span>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="text" id="text"></div>
+    <div class="overlay" id="overlay">
+      <div class="translation" id="translation"></div>
+      <div class="glossary" id="glossary"></div>
+      <div class="sub" id="finalStats"></div>
+      <div class="go">press <kbd>tab</kbd> for the next one</div>
+    </div>
+  </div>
+
+  <div class="hint">click here and start typing &middot; <kbd>tab</kbd> new sentence/paragraph</div>
+  <input id="input" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
+
+  <script src="data.js"></script>
+  <script>
+    const els = {
+      stage: document.getElementById("stage"),
+      text: document.getElementById("text"),
+      input: document.getElementById("input"),
+      overlay: document.getElementById("overlay"),
+      translation: document.getElementById("translation"),
+      glossary: document.getElementById("glossary"),
+      finalStats: document.getElementById("finalStats"),
+      wpm: document.getElementById("wpm"),
+      acc: document.getElementById("acc"),
+      time: document.getElementById("time"),
+      modeSentence: document.getElementById("mode-sentence"),
+      modeParagraph: document.getElementById("mode-paragraph"),
+    };
+
+    let mode = "sentence";
+    let current = null;
+    let startTime = null;
+    let finished = false;
+    let timerHandle = null;
+
+    function pick(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function render() {
+      const target = current.text;
+      const typed = els.input.value;
+      els.text.replaceChildren(...[...target].map((ch, i) => {
+        const span = document.createElement("span");
+        span.className = "char";
+        if (i < typed.length) span.className += typed[i] === ch ? " correct" : " incorrect";
+        if (i === typed.length) span.className += " current";
+        span.textContent = ch;
+        return span;
+      }));
+    }
+
+    function updateStats() {
+      if (!startTime) return;
+      const minutes = (Date.now() - startTime) / 60000;
+      const typed = els.input.value;
+      let correct = 0;
+      for (let i = 0; i < typed.length; i++) if (typed[i] === current.text[i]) correct++;
+      els.wpm.textContent = minutes > 0 ? Math.round((correct / 5) / minutes) : 0;
+      els.acc.textContent = typed.length ? Math.round((correct / typed.length) * 100) + "%" : "100%";
+      els.time.textContent = Math.round((Date.now() - startTime) / 1000) + "s";
+    }
+
+    function loadNext() {
+      finished = false;
+      startTime = null;
+      clearInterval(timerHandle);
+      els.overlay.classList.remove("show");
+      els.stage.classList.remove("blurred");
+      els.input.value = "";
+      els.wpm.textContent = "0";
+      els.acc.textContent = "100%";
+      els.time.textContent = "0s";
+
+      if (mode === "sentence") {
+        const s = pick(GAME_DATA.sentences);
+        current = { text: s.de, en: s.en, glossary: null };
+      } else {
+        const p = pick(GAME_DATA.paragraphs);
+        current = { text: p.text, en: null, glossary: p.glossary };
+      }
+      render();
+      els.input.focus();
+    }
+
+    function finish() {
+      finished = true;
+      clearInterval(timerHandle);
+      updateStats();
+      els.stage.classList.add("blurred");
+      els.translation.textContent = current.en ? `"${current.en}"` : "";
+      els.finalStats.textContent = `${els.wpm.textContent} wpm · ${els.acc.textContent} accuracy`;
+      els.glossary.innerHTML = current.glossary
+        ? current.glossary.map(g => `<span><b>${g.term}</b> — ${g.en}</span>`).join("")
+        : "";
+      els.overlay.classList.add("show");
+    }
+
+    els.input.addEventListener("input", () => {
+      if (finished) return;
+      if (!startTime) {
+        startTime = Date.now();
+        timerHandle = setInterval(updateStats, 250);
+      }
+      if (els.input.value.length > current.text.length) {
+        els.input.value = els.input.value.slice(0, current.text.length);
+      }
+      render();
+      updateStats();
+      if (els.input.value.length === current.text.length) finish();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Tab") {
+        e.preventDefault();
+        loadNext();
+      }
+    });
+
+    els.stage.addEventListener("click", () => els.input.focus());
+    document.body.addEventListener("click", () => els.input.focus());
+
+    function setMode(next) {
+      mode = next;
+      els.modeSentence.classList.toggle("active", mode === "sentence");
+      els.modeParagraph.classList.toggle("active", mode === "paragraph");
+      loadNext();
+    }
+    els.modeSentence.addEventListener("click", () => setMode("sentence"));
+    els.modeParagraph.addEventListener("click", () => setMode("paragraph"));
+
+    loadNext();
+  </script>
+</body>
+</html>
