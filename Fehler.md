@@ -1407,3 +1407,23 @@
 - **incorrect:** `luft`
 - **correct:** `Luft`
 - **correction:** capitalize the noun
+
+---
+
+## "das Windrad" wrongly treated as masculine (should be neuter)
+
+- **frequency:** 1
+- **rule:** "das Windrad" is neuter — Akkusativ indefinite article is "ein", not "einen".
+- **description:** Used the masculine Akkusativ article with a neuter noun.
+
+### Examples
+
+**Example 1**
+
+<span style="color:red">Ich habe einen Windrad rotieren sehen.</span>
+
+<span style="color:green">Ich habe ein Windrad rotieren sehen.</span>
+
+- **incorrect:** `einen Windrad`
+- **correct:** `ein Windrad`
+- **correction:** masculine Akkusativ article → neuter

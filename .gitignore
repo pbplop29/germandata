@@ -3,3 +3,5 @@ tts_cache/
 voices/
 __pycache__/
 *.pyc
+.obsidian/
+sendung_audio/

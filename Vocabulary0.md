@@ -121,4 +121,15 @@
 | **kämpfen um**             | Akkusativ                   | to fight/struggle for (a contested prize)       | Die Spieler **kämpfen um** den Sieg.                                                   |
 | **kämpfen mit**            | Dativ                       | to fight/struggle with (a person or difficulty) | Er **kämpft mit** seinen Zweifeln.                                                     |
 | **wirken auf**             | Akkusativ                   | to have an effect on / to come across as        | Die Musik **wirkt** beruhigend **auf** mich. Sie **wirkt** selbstbewusst **auf** mich. |
+| **achten auf**             | Akkusativ                   | to pay attention to                             | Sie **achtet** genau **auf** ihre Ernährung.                                           |
+| **sich auswirken auf**     | Akkusativ                   | to have an effect on                            | Stress **wirkt sich** negativ **auf** die Gesundheit **aus**.                          |
+| **beeindrucken mit**       | Dativ                       | to impress with                                 | Er **beeindruckt** alle **mit** seinem Wissen.                                         |
+| **binden an**              | Akkusativ                   | to bind/tie to                                  | Der Vertrag **bindet** sie **an** die Firma.                                           |
+| **sich engagieren für**    | Akkusativ                   | to be committed to, get involved in             | Er **engagiert sich** stark **für** den Umweltschutz.                                  |
+| **glauben an**             | Akkusativ                   | to believe in                                   | Sie **glaubt an** ihre eigenen Fähigkeiten.                                            |
+| **sich gliedern in**       | Akkusativ                   | to be divided/structured into                   | Der Kurs **gliedert sich in** drei Module.                                             |
+| **gratulieren zu**         | Dativ                       | to congratulate on                              | Ich **gratuliere** dir **zum** Geburtstag.                                             |
+| **sterben an**             | Dativ                       | to die of/from                                  | Er **starb an** einer schweren Krankheit.                                              |
+| **sich vorbereiten auf**   | Akkusativ                   | to prepare for                                  | Sie **bereitet sich auf** die Prüfung **vor**.                                         |
+| sagen aus Erfahrung        | Akk                         | say from Experience                             |                                                                                        |
 

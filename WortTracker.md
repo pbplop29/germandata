@@ -39,6 +39,11 @@ Track welche Wörter aus jedem Vocabulary-Kapitel schon in einem Gespräch benut
 - [x] verrückt
 - [x] einen Vogel haben
 - [x] er spinnt
+- [x] der Vogel
+- [x] der Baum
+- [x] der Himmel
+- [x] die Wiese
+- [x] der Fluss
 
 
 
